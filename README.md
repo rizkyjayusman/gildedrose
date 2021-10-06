@@ -498,4 +498,4 @@ class Item {
 }
 ````
 
-we will comeback soon!
+finally! the kata refactoring challenge completed. 

@@ -229,35 +229,49 @@ class Item {
 
 ````
 
-then the first if would be like this after we change a bit:
+and we put the check item name to like this:
+
+````
+class Item {
+    ...
+    public boolean isAgedBrie() {
+        return name.equals("Aged Brie");
+    }
+    
+    public boolean isBackstage() {
+        return name.equals("Backstage passes to a TAFKAL80ETC concert");
+    }
+    
+    public boolean isSulfuras() {
+        return name.equals("Sulfuras, Hand of Ragnaros")
+    }
+    ...
+}
+
+````
+
+also we separate all nested condition from the root condition then  the first if would be like this after we change a bit:
+
 ````
 class GildedRose {
     
     ...
     
     public void updateQuantity() {
-        if(item[i].getName().equals("Aged Brie") ||
-            item[i].getName().equals("Backstage passes to a TAFKAL80ETC concert")) {
-            if (! items[i].isQualityFull()) {
-                item[i].increaseQuality();
-
-                if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert") &&
-                    item[i].getSellIn() < 11) {
-                        item[i].increaseQuality();
-                    }
-
-                if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert") &&
-                    items[i].sellIn < 6) {
-                        item[i].increaseQuality();
-                }
-            }
+        if((item[i].isAgedBrie() || item[i].isBackstage()) && ! items[i].isQualityFull()) {
+            item[i].increaseQuality();
         }
         
-        if (!items[i].getName().equals("Aged Brie")
-            && !items[i].getName().equals("Backstage passes to a TAFKAL80ETC concert")
-            && !items[i].getName().equals("Sulfuras, Hand of Ragnaros")
-            && item[i].hasQuality()) {
-                item[i].decreaseQuality();
+        if (items[i].isBackstaged() && item[i].getSellIn() < 11) {
+            item[i].increaseQuality();
+        }
+
+        if (items[i].isBackstaged() && items[i].sellIn < 6) {
+            item[i].increaseQuality();
+        }
+        
+        if (!items[i].isAgedBrie() && !items[i].isBackstaged() && !items[i].isSulfuras() && item[i].hasQuality()) {
+            item[i].decreaseQuality();
         }
     }
 

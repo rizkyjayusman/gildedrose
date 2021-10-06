@@ -273,11 +273,92 @@ class GildedRose {
         if (!items[i].isAgedBrie() && !items[i].isBackstaged() && !items[i].isSulfuras() && item[i].hasQuality()) {
             item[i].decreaseQuality();
         }
+        
+        ...
     }
 
     ...
 
 }
+````
+
+next we go to the next line of the code. we would to see handler to decrease the sellIn when the item was not "Sulfuras".
+we would to add decrease sell in function into Item class
+
+````
+GildedRose {
+    ...
+        if (!items[i].isSulfuras()) {
+            items[i].decreaseSellIn();
+        }   
+    ...
+}
+````
+
+````
+Item {
+    ...
+    public void decreaseSellIn() {
+        sellIn--;
+    }
+    ...
+}
+````
+
+then we jump to the next line code and separate all nested condition from root condition.
+
+````
+if(items[i].isAgedBrie() && items[i].getSellIn() < 0 && ! items[i].isQualityFull()) {
+    items[i].increaseQuality();
+}
+
+if(items[i].isBackstaged() && item[i].sellIn < 0) {
+    items[i].decreaseQuality();
+}
+
+if(! item[i].isAgedBrie() && ! item[i].isBackstaged() && ! items[i].isSulfuras() && && items[i].hasQuality() && items[i].getSellIn() < 0) {
+    items[i].decreaseQuality();
+}
+````
+
+the GildedRose class would be like this:
+
+````
+    if(items[i].isAgedBrie() && ! items[i].isQualityFull()) {
+        items[i].increaseQuality();
+    }
+
+    if(items[i].isBackstage() && ! items[i].isQualityFull()) {
+        items[i].increaseQuality();
+    }
+    
+    if (items[i].isBackstaged() && item[i].getSellIn() < 11) {
+        item[i].increaseQuality();
+    }
+
+    if (items[i].isBackstaged() && items[i].sellIn < 6) {
+        item[i].increaseQuality();
+    }
+    
+    if (! items[i].isAgedBrie() && ! items[i].isBackstaged() && ! items[i].isSulfuras() && item[i].hasQuality()) {
+        item[i].decreaseQuality();
+    }
+    
+    if (! items[i].isSulfuras()) {
+        items[i].decreaseSellIn();
+    }   
+    
+    if(items[i].isAgedBrie() && items[i].getSellIn() < 0 && ! items[i].isQualityFull()) {
+        items[i].increaseQuality();
+    }
+    
+    if(items[i].isBackstaged() && item[i].sellIn < 0) {
+        items[i].decreaseQuality();
+    }
+    
+    if(! item[i].isAgedBrie() && ! item[i].isBackstaged() && ! items[i].isSulfuras() && && items[i].hasQuality() && items[i].getSellIn() < 0) {
+        items[i].decreaseQuality();
+    } 
 ````
 
 we will comeback soon!

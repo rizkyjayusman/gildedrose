@@ -70,7 +70,7 @@ class GildedRose {
 ````
 
 ````
-public class Item {
+class Item {
 
     public String name;
 
@@ -92,6 +92,54 @@ public class Item {
 }
 ````
 
-# Steps
+# How We Solve The Problem
 
-comming soon!
+First, we create a public getter and setter for the Item attributes and set the Item attributes access modifier from public into private.
+
+````
+class Item {
+    
+    ...
+    
+    public String getName() {
+        return name;
+    }
+
+    public int getSellIn() {
+        return sellIn;
+    }
+
+    public int getQuality() {
+        return quality;
+    }
+
+    ...
+    
+}
+````
+
+Then we replace all the Item attributes on GildedRose class using public setter and getter
+
+````
+class GildedRose {
+    ...
+    
+        public void updateQuality() {
+            ...
+            
+                // if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (!items[i].getName().equals("Aged Brie") && !items[i].getName().equals("Backstage passes to a TAFKAL80ETC concert")) {
+
+            ...   
+
+                // items[i].quality = items[i].quality + 1;
+                items[i].setQuantity(items[i].getQuantity() + 1);
+            
+            ...
+        }
+    
+    ...
+}
+````
+
+comming soon!g

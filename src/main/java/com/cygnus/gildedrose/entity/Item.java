@@ -22,16 +22,12 @@ public class Item {
         return sellIn;
     }
 
-    public void setQuality(int quality) {
-        this.quality = quality;
+    public int getQuality() {
+        return quality;
     }
 
     public void decreaseSellIn() {
         sellIn--;
-    }
-
-    public int getQuality() {
-        return quality;
     }
 
     public void resetQuality() {
@@ -40,12 +36,8 @@ public class Item {
 
     public void increaseQuality() {
         if(! isQualityFull()) {
-            increaseQuality(1);
+            quality++;
         }
-    }
-
-    public void increaseQuality(int i) {
-        this.quality += i;
     }
 
     public void decreaseQuality() {

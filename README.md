@@ -142,4 +142,128 @@ class GildedRose {
 }
 ````
 
-comming soon!g
+Next, we take a look the first if condition GildedRose's updateQuality function.
+
+We got the code check if the item's name was not "Aged Brie" and also not "Backstage passes to a TAFKAL80ETC concert" 
+and do some logic to update the quality of item.
+Then we break the else code into a single if that do a task to check the item is "Aged Brie" or "Backstaged passes to a TAFKAL80ETC concert" and do their logic in it.
+
+````
+if (items[i].getName().equals("Aged Brie") || item[i].getName().equals("Backstaged passes to a TAFKAL80ETC concert")) {
+    // do unrefactored update quality of age brie or backstage passes to a TAFKAL80ETC concert
+}
+````
+
+after we break the else then we continue to the inner if that contained on if condition above.
+we got the code that check if the item quality less than 50 then add +1 to the item quality. we can move this condition to the
+Item class like this:
+
+````
+class Item {
+    ...
+    public boolean isQualityFull() {
+        return quality >= 50;
+    }
+    ...
+}
+````
+````
+class GildedRose {
+    ...
+         if (! items[i].isQualityFull()) {
+            // do unrefactored update quality logic
+         }
+    ...
+}
+````
+
+then we go to the next line of code and found code that check if the item was "Backstage passes to a TAFKAL80ETC concert".
+Then we put it out the inner if condition and add check "Backstage passes to TAFKAL80ETC" into it 
+and we also remove the condition that check the item quality not full cause already checked before.
+````
+if (items[i].getName().equals("Backstage passes to a TAFKAL80ETC concert") && items[i].getSellIn() < 11) {
+    item[i].increaseQuality();
+}
+
+if (items[i].getName().equals("Backstage passes to a TAFKAL80ETC concert") && items[i].sellIn < 6) {
+    item[i].increaseQuality();
+}
+````
+and also we change the operation of increase quality and move it to the Item class
+
+````
+class Item {
+    ...
+    public void increaseQuality() {
+        quality++;
+    }
+    ...
+}
+````
+
+That is it! we finally break the else code of first if, then we continue into the condition that 
+check if item was not "Aged Brie" or "Backstage passes to a TAFKAL80ETC concert". we could merge this condition with the inner condition of it so will be like this:
+
+````
+if (!items[i].getName().equals("Aged Brie") && 
+    !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert") && 
+    !items[i].name.equals("Sulfuras, Hand of Ragnaros") &&
+    items[i].hasQuality()) {
+        item[i].decreaseQuality();
+}
+````
+
+and we create a function on Item class to check is the item has quality and also decrease quality function
+````
+class Item {
+    ...
+    public boolean hasQuality() {
+        return this.quality > 0;
+    }
+    
+    public void decreaseQuality() {
+        quality--;
+    }
+    ...
+}
+
+````
+
+then the first if would be like this after we change a bit:
+````
+class GildedRose {
+    
+    ...
+    
+    public void updateQuantity() {
+        if(item[i].getName().equals("Aged Brie") ||
+            item[i].getName().equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (! items[i].isQualityFull()) {
+                item[i].increaseQuality();
+
+                if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert") &&
+                    item[i].getSellIn() < 11) {
+                        item[i].increaseQuality();
+                    }
+
+                if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert") &&
+                    items[i].sellIn < 6) {
+                        item[i].increaseQuality();
+                }
+            }
+        }
+        
+        if (!items[i].name.equals("Aged Brie")
+            && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")
+            && !items[i].name.equals("Sulfuras, Hand of Ragnaros")
+            && item[i].hasQuality()) {
+                    items[i].quality = items[i].quality - 1;
+        }
+    }
+
+    ...
+
+}
+````
+
+we will comeback soon!

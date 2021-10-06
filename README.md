@@ -361,4 +361,141 @@ the GildedRose class would be like this:
     } 
 ````
 
+then break into a few function that relate into the item name:
+
+````
+if(items[i].isAgedBrie()) {
+    updateQualityOfAgedBrie(items[i]);
+} else if (items[i].isBackstaged()) {
+    updateQualityOfBackstaged(items[i]);
+} else if (items[i].isSulfuras()) {
+    updateQualityOfSulfuras(items[i]);
+} else {
+    updateQualityUncheckedItem(items[i]);
+}
+
+public void updateQualityOfAgedBrie(Item item) {
+    if(item.isQualityFull()) {
+        item.increaseQuality();
+    }
+    
+    item.decreaseSellIn();
+    
+    if(item.getSellIn() < 0 && ! items[i].isQualityFull()) {
+        item.increaseQuality();
+    }
+
+}
+
+public void updateQualityOfBackstaged(Item item) {
+    if(! item.isQualityFull()) {
+        item.increaseQuality();
+    }
+    
+    if (item.getSellIn() < 11) {
+        item.increaseQuality();
+    }
+    
+    if (item.getSellIn() < 6) {
+        item.increaseQuality();
+    }
+    
+    item.decreaseSellIn();
+    
+    if(item[i].sellIn < 0) {
+        items[i].decreaseQuality();
+    }
+}
+
+public void updateQualityUncheckedItem(Item item) {
+    if (item.hasQuality()) {
+        item.decreaseQuality();
+    }
+    
+    item.decreaseSellIn();
+    
+    if(item.hasQuality() && item.getSellIn() < 0) {
+        item.decreaseQuality();
+    } 
+}
+````
+
+That is it! now we can extends the Item class to add updateQuality function with different implementation
+
+````
+class AgedBrieItem extends Item {
+    public AgedBrieItem(String name, int sellIn, int quality) {
+        super(name, sellIn, quality);
+    }
+
+    @Override
+    public void updateQuantity() {
+        if(isQualityFull()) {
+            increaseQuality();
+        }
+        
+        decreaseSellIn();
+        
+        if(getSellIn() < 0 && ! isQualityFull()) {
+            increaseQuality();
+        }
+    }
+}
+
+class BackstagedItem extends Item {
+     public BackstageItem(String name, int sellIn, int quality) {
+        super(name, sellIn, quality);
+    }
+
+    @Override
+    public void updateQuantity() {
+        if(! isQualityFull()) {
+            increaseQuality();
+        }
+        
+        if (getSellIn() < 11) {
+            increaseQuality();
+        }
+        
+        if (getSellIn() < 6) {
+            increaseQuality();
+        }
+        
+        decreaseSellIn();
+        
+        if(sellIn < 0) {
+            decreaseQuality();
+        }
+    }
+}
+
+class SulfurasItem extends Item {
+    public SulfurasItem(String name, int sellIn, int quality) {
+        super(name, sellIn, quality);
+    }
+
+    @Override
+    public void updateQuantity() {
+        // doing nothing
+    }
+}
+
+class Item {
+    ...
+    
+    public void updateQuality() {
+        if (hasQuality()) {
+            decreaseQuality();
+        }
+        
+        decreaseSellIn();
+        
+        if(hasQuality() && getSellIn() < 0) {
+            decreaseQuality();
+        }
+    }
+    ...
+}
+````
+
 we will comeback soon!

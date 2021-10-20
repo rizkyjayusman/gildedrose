@@ -7,5 +7,6 @@ public class SulfurasQualityControl implements IQualityControl {
     }
 
     public void updateQuantity(Item item) {
+        // doing nothing
     }
 }

@@ -11,40 +11,21 @@ public class QualityControlFactory {
     }
 
     public static IQualityControl getControl(Item item) {
-        String var2 = item.getName();
-        byte var3 = -1;
-        switch(var2.hashCode()) {
-            case -1097458151:
-                if (var2.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                    var3 = 1;
-                }
-                break;
-            case -61479577:
-                if (var2.equals("Aged Brie")) {
-                    var3 = 0;
-                }
-                break;
-            case 562738722:
-                if (var2.equals("Sulfuras, Hand of Ragnaros")) {
-                    var3 = 2;
-                }
-        }
-
-        Object control;
-        switch(var3) {
-            case 0:
+        IQualityControl control;
+        switch(item.getName()) {
+            case AGED_BRIE:
                 control = new AgedBrieQualityControl();
                 break;
-            case 1:
+            case BACKSTAGE:
                 control = new BackstageQualityControl();
                 break;
-            case 2:
+            case SULFURAS:
                 control = new SulfurasQualityControl();
                 break;
             default:
                 control = new DefaultQualityControl();
         }
 
-        return (IQualityControl)control;
+        return control;
     }
 }

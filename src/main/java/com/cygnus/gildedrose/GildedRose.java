@@ -1,5 +1,7 @@
 package com.cygnus.gildedrose;
 
+import com.cygnus.gildedrose.control.quality.IQualityControl;
+import com.cygnus.gildedrose.control.quality.QualityControlFactory;
 import com.cygnus.gildedrose.entity.Item;
 
 public class GildedRose {
@@ -12,7 +14,8 @@ public class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            item.updateQuantity();
+            IQualityControl qualityControl = QualityControlFactory.getControl(item);
+            qualityControl.updateQuantity(item);
         }
     }
 }

@@ -52,14 +52,6 @@ public class Item {
         return quality >= 50;
     }
 
-    public void updateQuantity() {
-        decreaseQuality();
-        decreaseSellIn();
-        if(hasQuality() && getSellIn() < 0) {
-            decreaseQuality();
-        }
-    }
-
     @Override
     public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;

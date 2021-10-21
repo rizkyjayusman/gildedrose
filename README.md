@@ -43,6 +43,6 @@ legendary item and as such its Quality is 80 and it never alters.
 
 <div align='center'>
 
-![Class Diagram](docs/class-diagram.png)
+![Class Diagram](docs/classdiagram.png)
 
 </div>

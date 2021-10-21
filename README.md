@@ -129,6 +129,16 @@ class Item {
 }
 ````
 
+# UML Design
+
+
+<div align='center'>
+
+![Class Diagram](docs/class-diagram.png)
+
+</div>
+
+
 # How We Solve The Problem
 
 First, we create a public getter and setter for the Item attributes and set the Item attributes access modifier from public into private.
